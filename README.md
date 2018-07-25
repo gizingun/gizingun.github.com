@@ -1,1 +1,1 @@
-# gizingun.github.com
+# gizingun.github.io
