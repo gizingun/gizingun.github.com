@@ -1,38 +1,37 @@
 # SITE CONFIGURATION
-baseurl:
-url: "https://gizingun.github.io"
-title: Gizingun's blog # site's title
-description: "Private blog" # used by search engines
-
+# baseurl: "/type-theme"
+url: "https://gizingun.github.io/"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: # blog's title
-  avatar: assets/img/triangle.svg
+  title: Type Theme
+  avatar: assets/img/simon.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
+  description: "Simon 기술 블로그" # used by search engines
 
   # Header and footer text
-  header_text: > #two or three lines to describe your site
-     <p></p>
-  header_text_feature_image: assets/img/pexels/triangular.jpeg
+  header_text: >
+     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+     <p>Remove all header text in <code>_config.yml</code> to disable this feature.</p>
+  header_text_feature_image:
   footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+   Powered by <a href="https://jekyllrb.com/">Jekyll</a>
 
   # Icons
-  rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: "gizingun@gmail.com"
+  rss: false
+  email_address: # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
   dribbble:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "gizingun/gizingun.github.io"
   google_plus:
   instagram:
-  keybase:
   linkedin:  # Full URL
   pinterest:
   reddit:
@@ -40,71 +39,38 @@ theme_settings:
   stack_exchange:  # Full URL
   steam:
   tumblr:
-  twitter: # "twitter username"
-  vimeo:
+  twitter: "twitter"
   wordpress:
   youtube:
-  
-  # Sharing options
-  share_buttons:
-    facebook: true
-    twitter: true
-    google_plus: true
-    tumblr:
-    pinterest:
-    pocket:
-    reddit: true
-    linkedin:
-    wordpress:
-    email: true
 
-  # Scripts / Features 
+  # Scripts
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
   katex: true # Enable if using math markup
-  
-  special_page:
-    search: 
-      icon: "search" # Assuming page link and icon are the same
-      enabled: true
-    tags:
-      icon: "tags"
-      enabled: true
-  
+  search: false # Enable the search feature
+
   # Localization strings
   str_follow_on: "Follow on"
   str_rss_follow: "Follow RSS feed"
-  str_share_on: "Share on"
-  str_add_to: "Add to"
   str_email: "Email"
-  str_tweet: "Tweet"
-  str_pin_it: "Pin it"
   str_next_post: "Next post"
   str_previous_post: "Previous post"
   str_next_page: "Next"
   str_previous_page: "Prev"
   str_continue_reading: "Continue reading"
   str_javascript_required_disqus: "Please enable JavaScript to view comments."
+  str_search_no_results: "No results found."
 
   # Colours, typography and padding
   # Open the "_sass > base" folder, and open "_variables.scss"
   google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
 
   # Post navigation
-  post_navigation: true
-  
-  
+  post_navigation: false
+
 # PAGINATION
 paginate: 5
 paginate_path: "blog/page:num"
-
-
-# PORTFOLIO
-collections:
-  portfolio:
-    output: true
-    permalink: /:collection/:name
-
 
 # BUILD SETTINGS
 markdown: kramdown
@@ -112,6 +78,8 @@ highlighter: rouge
 sass:
   sass_dir: _sass
   style: :compressed
-plugins: [jekyll-paginate, jekyll-seo-tag]
-#theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
-exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png", "package.json", "node_modules", "gulpfile.js", ".idea/*"]
+plugins: [jekyll-paginate]
+theme: jekyll-theme-type
+exclude:
+  - Gemfile
+  - Gemfile.lock
