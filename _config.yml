@@ -13,10 +13,10 @@ theme_settings:
 
   # Header and footer text
   header_text: >
-     # <p>Hyunuk Kim</p>
-     # <p>Software Developer</p>
+     <p>Hyunuk Kim</p>
+     <p>Software Developer</p>
 
-  header_text_feature_image: assets/img/head.png
+  header_text_feature_image: assets/img/sample_feature_img_3.png
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a>
 
