@@ -14,14 +14,7 @@ theme_settings:
   # Header and footer text
   header_text: >
      <p><font size="20">Hyunuk Kim</font></p>
-     <p> </p>
-     <p> </p>
-     <p> </p>
-     <p> </p>
-     <p> </p>
-     <p> </p>
-     <p> </p>
-     <p> </p>
+     <p> \n\n\n\n\n</p>
      <p>Software Developer</p>
 
   header_text_feature_image: assets/img/head.jpg

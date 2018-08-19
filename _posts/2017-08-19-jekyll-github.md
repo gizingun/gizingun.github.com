@@ -35,25 +35,6 @@ baseurl                  : "" # the subpath of your site, e.g. "/blog"
 저장소의 `_config.yml`을 수정한 후 변경된 내용을 원격 저장소에 push한다면 잠시후 `[username].github.io` url을 통해 선택한 Jekyll테마가 적용된 블로그를 확인 할 수 있습니다.
 
 
-## 프로젝트 주소 페이지 방식으로 블로그 생성
-
-	jekyll new blog
-	cd blog
-	jekyll serve --watch
-
-`jekyll new blog`현재 디록토리 밑에 blog 디렉토리를 만들고 jeckyll 기본 디렉토리와 파일을 생성한다. jeckyll은 기본적으로 서버를 내장하고 있어 NgineX와 같은 별도의 웹서버를 띄우지 않아도 만들어진 사이트를 확인할 수 있다. `jekyll serve --watch`를 실행하면 `localhost:4000`에서 로컬에 생성된 디폴트 jekyll 페이지를 볼 수 있다.
-
-`--watch` 옵션은 사이트를 변경하는 대로 다시 빌드하여 브라우저에서 변경사항을 바로 확인할 수 있게하는 옵션이다.
-
-	git init
-	git checkout --orphan gh-pages
-	git remote add origin 저장소url
-	git add .
-	git commit -m "Initialize blog";
-	git push origin gh-pages
-
-이제 `사용자명.github.io/blog`의 주소로 이동하면 자신의 블로그를 볼 수 있다. 참고로 동기화과정이 조금 오래 걸릴 수 있다.
-
 ## 블로그에 포스팅하기
 
 Jekyll은 각 블로그 글마다 파일을 따로 구성합니다. 즉, Jekyll은 각각의 작성된 파일을 각 포스트(게시글)로 보여주는 것입니다. 그러므로 글을 등록하기 위해서는 저장소의 `_post`폴더에 포스팅하고자 할 내용을 파일로 저장해야 합니다. 이때, Jekyll은 `_post`폴더에 있는 파일만 블로그 포스트로 인식합니다.
