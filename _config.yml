@@ -12,11 +12,11 @@ theme_settings:
   description: "Hyunuk 기술 블로그" # used by search engines
 
   # Header and footer text
-  # header_text: >
-     # <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-     # <p>Remove all header text in <code>_config.yml</code> to disable this feature.</p>
+  header_text: >
+     # <p>Hyunuk Kim</p>
+     # <p>Software Developer</p>
 
-  header_text_feature_image:
+  header_text_feature_image: assets/img/head.png
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a>
 
