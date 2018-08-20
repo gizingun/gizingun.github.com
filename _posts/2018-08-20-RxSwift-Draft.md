@@ -62,8 +62,65 @@ var currentIndex = 0
 
 2. Imperative programming (명령형 프로그래밍)
 
-3. Side effects
+3. Side effects (부작용의 뉘앙스는 아님)
+State & Imperative programming
 
+4. Decalarative code (변화의 폭을 개발자가 컨트롤 하는 코드?)
+RxSwift combines some of the best aspects of imperative code and functional code.
+Declarative code lets you define pieces of behavior, and RxSwift will run these behaviors any time there’s a relevant event and provide them an immutable, isolated data input to work with.
+
+5. Reactive systems
+- Responsive
+- Resilient (회복성?)
+: 오류에 대한 회복성?
+- Elastic
+: 다양한 일을 해야함?
+- Message driven
+
+
+#### Foundation of RxSwift
+
+##### Observables
+
+The Observable<T> class provides the foundation of Rx code: the ability to asynchronously produce a sequence of events that can “carry” an immutable snapshot of data T
+
+An *Observable* can emit (and observers can receive) only three types of events
+1. A *next* event
+2. A *completed* event
+3. An *error* event
+
+###### Finite observerable sequences
+> download files
+~~~ruby
+API.download(file: "http://www...")
+  .subscribe(onNext: { data in
+    ... append data to temporary file
+  },
+  onError: { error in
+    ... display error to user
+  },
+  onCompleted: {
+    ... use downloaded file
+  })
+~~~
+
+###### Infinite observable sequences
+ 
+ For example UIEvents, Notification Center, etc.
+~~~ruby
+UIDevice.rx.orientation
+  .subscribe(onNext: { current in
+    switch current {
+      case .landscape:
+        ... re-arrange UI for landscape
+      case .portrait:
+        ... re-arrange UI for portrait
+    }
+})
+~~~
+
+
+##### Operators
 
 
 
