@@ -1,25 +1,20 @@
-// Variables
-@import 'base/variables';
-
 // External
 @import 'external/reset';
 @import 'external/syntax';
 
 // Base
+@import 'base/variables';
 @import 'base/global';
 @import 'base/utility';
 
 // Posts
 @import 'layouts/posts';
 @import 'layouts/index';
-@import 'layouts/page';
 @import 'layouts/tags';
 @import 'layouts/search';
 
-// Includes
+// Partials
+@import 'includes/header';
 @import 'includes/footer';
+@import 'includes/tag_list';
 @import 'includes/post_nav';
-@import 'includes/navbar';
-@import 'includes/portfolio';
-@import 'includes/grid';
-@import 'includes/share_buttons';
