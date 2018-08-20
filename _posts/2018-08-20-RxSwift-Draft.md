@@ -32,16 +32,38 @@ tags: [ios, swift, RxSwift]
 #### Synchronous code
 
 ~~~ruby
-
 var array = [1, 2, 3]
 for number in array {
   print(number)
   array = [4, 5, 6]
 }
 print(array)
-
 ~~~
 
-sfaf
+#### Asynchronous code
+
+~~~ruby
+var array = [1, 2, 3]
+var currentIndex = 0
+//this method is connected in IB to a button
+@IBAction func printNext(_ sender: Any) {
+  print(array[currentIndex])
+  if currentIndex != array.count-1 {
+    currentIndex += 1
+  }
+}
+~~~
+
+#### Asynchronous programming glossary
+
+- Some of the language in RxSwift is so tightly bound to asynchronous, reactive, and/or functional programming that it will be easier if you first understand the following foundational terms
+
+1. State, and sprcifically, shared mutable state (상태)
+
+2. Imperative programming (명령형 프로그래밍)
+
+3. Side effects
+
+
 
 
