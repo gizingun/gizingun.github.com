@@ -122,5 +122,38 @@ UIDevice.rx.orientation
 
 ##### Operators
 
+ObservableType and the implementation of Observable class include plenty of methods that abstract discrete pieces of asynchronous work, which can be composed together to implement more complex logic. (Highly decoupled and composable)
 
+~~~ruby
+UIDevice.rx.orientation
+  .filter { value in
+    return value != .landscape
+  }
+.map { _ in
+    return "Portrait is the best!"
+  }
+  .subscribe(onNext: { string in
+    showAlert(text: string)
+  })
+~~~
+
+![Operator]({{ site.baseUrl }}/assets/img/rxswift_operators.png)
+
+Decoupled이고 composable하기 떄문에 연결해서 사용하면 더 많은 걸 구현할 수 있음
+
+##### Schedulers
+
+Schedulers are the Rx Equivalent of dispatch queues.
+Event의 발생을 serial한 queue 혹은 concurrent한 queue에서 관찰할 수 있도록 할 수 있음
+
+![Schedulers]({{ site.baseUrl }}/assets/img/rxswift_scheduler.png)
+
+##### App architecture
+
+RxSwift doesn’t alter your app’s architecture in any way.
+It’s important to note that you definitely do not have to start a project from scratch to make it a reactive app.
+
+MVVM architecture
+
+![MVVM]({{ site.baseUrl }}/assets/img/rxswift_mvvm.png)
 
