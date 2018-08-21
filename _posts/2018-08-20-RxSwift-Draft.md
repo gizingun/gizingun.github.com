@@ -162,5 +162,218 @@ MVVM architecture
 RxSwift is the implementation of the common Rx API.
 RxCocoa is RxSwift’s companion library holding all classes that specifically aid development for UIKit and Cocoa.
 
+### Observable
 
+#### What is an observable
+
+"observable", "observable sequence", "sequence", "stream"
+
+#### Lifecycle of an observable
+
+* next
+* completed (Once an observable is terminated, it can no longer emit events)
+* error
+
+#### Creating observables
+
+* just
+* of
+* from
+
+~~~ruby
+    let observable: Observable<Int> = Observable<Int>.just(one)
+    let observable2 = Observable.of(one, two, three)
+    let observable3 = Observable.of([one, two, three])
+    let observable4 = Observable.from([one, two, three])
+~~~
+
+#### Subscribing to observables
+
+Observable doesn’t do anything until it receives a subscription
+
+~~~ruby
+    let one = 1
+    let two = 2
+    let three = 3
+    let observable = Observable.of(one, two, three)
+    observable.subscribe { event in
+        print(event)
+    }
+~~~
+
+
+~~~ruby
+    observable.subscribe { event in
+      if let element = event.element {
+        print(element)
+      }
+    }
+~~~
+
+~~~ruby
+    observable.subscribe(onNext: { element in
+      print(element)
+    })
+~~~
+
+
+observable sequence with zero elements
+
+~~~ruby
+    elementsxample(of: "empty") {
+      let observable = Observable<Void>.empty()
+    }
+~~~
+
+#### Disposing and terminating
+
+dispose - Observable의 해제
+
+~~~ruby
+    let observable = Observable.of("A", "B", "C")
+    // 2
+    let subscription = observable.subscribe { event in
+        // 3
+        print(event)
+    }
+    subscription.dispose()
+~~~
+
+disposebag
+
+If you forget to add a subscription to a dispose bag, or manually call dispose on it when you’re done with the subscription, or in some other way cause the observable to terminate at some point, you will probably leak memory
+
+create
+
+~~~ruby
+    enum MyError: Error {
+        case anError
+    }
+
+    let disposeBag = DisposeBag()
+    
+    Observable<String>.create { observer in
+        // 1
+        observer.onNext("1")
+//        observer.onError(MyError.anError)
+        
+        // 2
+//        observer.onCompleted()
+        
+        // 3
+        observer.onNext("?")
+        
+        // 4
+        return Disposables.create()
+        }
+        .subscribe(
+            onNext: { print($0) },
+            onError: { print($0) },
+            onCompleted: { print("Completed") },
+            onDisposed: { print("Disposed") }
+        )
+        .disposed(by: disposeBag)
+~~~
+
+Memory leak
+
+~~~ruby
+    enum MyError: Error {
+        case anError
+    }
+    let disposeBag = DisposeBag()
+    Observable<String>.create { observer in
+        // 1
+        observer.onNext("1")
+        //    observer.onError(MyError.anError)
+        // 2
+        //    observer.onCompleted()
+        // 3
+        observer.onNext("?")
+        // 4
+        return Disposables.create()
+        }
+        .subscribe(
+            onNext: { print($0) },
+            onError: { print($0) },
+            onCompleted: { print("Completed") },
+            onDisposed: { print("Disposed") }
+    ).disposed(by: disposeBag)
+~~~
+
+#### Creating ovservable factories
+
+~~~ruby
+    let disposeBag = DisposeBag()
+    
+    // 1
+    var flip = false
+    
+    // 2
+    let factory: Observable<Int> = Observable.deferred {
+        
+        // 3
+        flip = !flip
+        
+        // 4
+        if flip {
+            return Observable.of(1, 2, 3)
+        } else {
+            return Observable.of(4, 5, 6)
+        }
+    }
+    
+    for _ in 0...3 {
+        factory.subscribe(onNext: {
+            print($0, terminator: "")
+        })
+            .disposed(by: disposeBag)
+        
+        print()
+    }
+~~~
+
+Externally, an observable factory is indistinguishable from a regular observable
+
+#### Using Traits
+
+Traits are observables with a narrower set of behaviors than regular observables.
+
+"Single, Maybe, Completable"
+
+Single - .next / .completed
+
+Completable - .next / .completed
+
+Maybe -  Single + Completable
+
+~~~ruby
+  let disposeBag = DisposeBag()
+    
+    // 1
+    var flip = false
+    
+    // 2
+    let factory: Observable<Int> = Observable.deferred {
+        
+        // 3
+        flip = !flip
+        
+        // 4
+        if flip {
+            return Observable.of(1, 2, 3)
+        } else {
+            return Observable.of(4, 5, 6)
+        }
+    }
+    
+    for _ in 0...3 {
+        factory.subscribe(onNext: {
+            print($0, terminator: "")
+        })
+            .disposed(by: disposeBag)
+        
+        print()
+    }
+~~~
 
