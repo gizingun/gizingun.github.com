@@ -377,3 +377,45 @@ Maybe -  Single + Completable
     }
 ~~~
 
+##### Subject
+
+PublishSubject only emits to current subscribers
+
+~~~ruby
+let subject = PublishSubject<String>()
+  subject.onNext("Is anyone listening?")
+  
+  let subscriptionOne = subject
+    .subscribe(onNext: { string in
+      print(string)
+    })
+  
+  subject.on(.next("1"))
+~~~
+
+Subjects act as both an observable and an observer
+
+* PublishSubject - start empty and only emits new elements to subscribers
+* BehaviorSubject - Start with an initial value and replays it or the latest element to  new subscribers
+* ReplaySubject - Initialized with a buffer size and will maintain a buffer of elements up to that size and replay it to new subscribers
+* Variable - Wraps a BehaviorSubject, preserves its current value as state, and replays only the latest/initial value to new subscribers 
+
+![Publish Subject]({{ site.baseUrl }}/assets/img/rxswift_publishSubject.png)
+
+![Behavior Subject]({{ site.baseUrl }}/assets/img/rxswift_behaviorSubject.png)
+
+Behavior subjects are useful when you want to pre-populate a view with the most recent data
+
+rxswitf_replaySubject
+
+![Replay Subject]({{ site.baseUrl }}/assets/img/rxswitf_replaySubject.png)
+
+Keep in mind when using a replay subject that this buffer is held in memory
+
+##### Variable
+
+Variable wraps a BehaviorSubject and stores its current value as state
+
+You can access that current value via its value property
+
+In order to access a variable’s underlying behavior subject, you call asObservable() on it
