@@ -49,8 +49,7 @@ $ source ~/.bash_profile
 ```
 pyenv {sub-command} [{params}...]
 ```
-{| class="wikitable"
-|+
+{|
 |-
 |Sub command
 |comments
