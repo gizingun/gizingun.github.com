@@ -164,3 +164,4 @@ $ pyenv virtualenv 2.7.10 test_env
 ## 참고
 * [TAEWAN.KIM 블로그](http://taewan.kim/post/python_virtual_env/)
 * [pyenv 에러 관련](https://github.com/pyenv/pyenv/wiki/Common-build-problems#build-failed-error-the-python-zlib-extension-was-not-compiled-missing-the-zlib)
+* [autoenv 설정](https://ujuc.github.io/2017/01/21/autoenv_seor-jeong/)
