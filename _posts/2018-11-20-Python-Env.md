@@ -12,6 +12,7 @@ Python은 2.x와 3.x이 공존하며, 다수의 서브 버전이 존재합니다
 개별의 독립된 환경을 pyenv, pyenv-virtualenv, autoenv, pip 와 같은 툴로 구성하는 방법을 알아보겠습니다.
 
 ## pyenv, pyenv-virtualenv, autoenv, pip
+>
 ### pyenv
 > Python 버전을 관리
 > 다양한 버전의 Python 설치 및 관리
@@ -24,8 +25,8 @@ Python은 2.x와 3.x이 공존하며, 다수의 서브 버전이 존재합니다
 ### pip
 > Python 라이브러리 관리
 
-## Setup pyenv
-### OS X
+## pyenv
+### install
 pyenv를 맥 OS X에 설치하기 위해서는 xcode command line tools와 zlib 설치 필수
 ```
 $ sudo xcode-select --install
@@ -82,29 +83,40 @@ pyenv {sub-command} [{params}...]
 |지정한 명령을 포함하는 모든 python 버전 출력 
 |}
 
-## `pyenv` Python Install Error
+## pyenv-virtualenv
+### install
+homebrew 통해 설치
+```
+$ brew install pyenv-virtualenv
+```
+### 환경변수 설정
+환경변수 등록
+zsh 사용시 "~/.bash_profile"을 "~/.zshrc"로 변경
+```
+$ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+```
+### 사용법
+`pyenv` 로 Python을 설치하면 .pyenv/versions 디렉터리에 2.7.x, 3.4.x 등의 디렉터리가 만들어지고 Python 런타임이 관리 됩니다. virtualenv를 사용하면 동일한 Python 버전을 각기 다른 환경으로 구분하여 관리합니다.
 
+Python 가상 환경 구성
+version 을 명시하지 않을 경우 현재 시스템 버전으로 가상환경을 설정
 ```
-Build failed: "ERROR: The Python zlib extension was not compiled. Missing the zlib?"
+$ pyenv virtualenv <vertualenv-name>
+or
+$ pyenv virtualenv <version> <vertualenv-name>
+```
+가상환경 종료
+```
+$ pyenv deactivate
+```
+가상환경 삭제
+```
+$ pyenv uninstall {환경명}
 ```
 
-On Mac OS X 10.9, 10.10, 10.11 and 10.13, you may need to set the CFLAGS environment variable when installing a new version in order to configure to find zlib headers
+## `autoenv`
+pyenv-virtualenv 은 가상환경을 활성화하기 위해서 직접 activate 해제하기 위해서는 deactivate를 해줘야합니다. 이러한 불편함은 `autoenv`를 통해 해결할 수 있습니다.
 
-```
-CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -v 2.7.7
-```
-
-If you installed zlib with `Homebrew`, you can set the CPPFLAGS environment variables:
-```
-CPPFLAGS="-I/usr/local/opt/zlib/include" pyenv install -v 3.7.0
-```
-
-Alternatively, try reinstalling XCode command line tools for your OS and when running Mojave or higher (10.14+) you will also [need to install the additional SDK header](https://developer.apple.com/documentation/xcode_release_notes/xcode_10_release_notes#3035624)
-```
-xcode-select --install
-sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
-
-```
 
 ## Dependency 관리
 
@@ -151,4 +163,4 @@ $ pyenv virtualenv 2.7.10 test_env
 
 ## 참고
 * [TAEWAN.KIM 블로그](http://taewan.kim/post/python_virtual_env/)
-# [pyenv 에러 관련](https://github.com/pyenv/pyenv/wiki/Common-build-problems#build-failed-error-the-python-zlib-extension-was-not-compiled-missing-the-zlib)
+* [pyenv 에러 관련](https://github.com/pyenv/pyenv/wiki/Common-build-problems#build-failed-error-the-python-zlib-extension-was-not-compiled-missing-the-zlib)
