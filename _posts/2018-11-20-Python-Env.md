@@ -6,7 +6,6 @@ tags: [python, pyenv, virtualenv]
 ---
 
 ## Python의 버전관리
-
 Python은 2.x와 3.x이 공존하며, 다수의 서브 버전이 존재합니다. 또한 Python 커뮤니티는 엄청난 수의 패키지를 만들고 공유하고 있습니다. 이런 패키지들은 각기 다른 버전의 Python 기반으로 만들어졌습니다. 하나의 개발환경에서 여러 Python 프로젝트를 진행할 경우 라이브러리 간 충돌이 일어나거나 매번 각 환경에 필요한 라이브러리 및 패키지를 재설치 하거나 Python 버전을 바꿔줘야하는 불편함이 발생할 수 있습니다.
 이런 문제들은 Python 프로젝트별 독립된 환경을 제공해줌으로써 해결할 수 있습니다.
 개별의 독립된 환경을 pyenv, pyenv-virtualenv, autoenv, pip 와 같은 툴로 구성하는 방법을 알아보겠습니다.
@@ -50,38 +49,27 @@ $ source ~/.bash_profile
 ```
 pyenv {sub-command} [{params}...]
 ```
-{|
-|-
-|Sub command
-|comments
-|-
-|local
-|현재 디렉터리에 python 버전 확인 및 지정
-|-
-|global
-|전역으로 설정된 python 버전
-|-
-|shell
-|shell에 python 버전 지정
-|-
-|install
-|python-build 를 사용하여 특정 버전의 python 설치 
-|-
-|uninstall
-|지정한 버전의 python 삭제 
-|-
-|version
-|현재 활성화된 python 버전 출력
-|-
-|versions
-|pyenv로 설치되어 이용 가능한 버전 출력
-|-
-|which
-|활성화된 python 명령의 위치 출력 
-|-
-|whenece
-|지정한 명령을 포함하는 모든 python 버전 출력 
-|}
+### subcommand
+>
+#### local
+> 현재 디렉터리에 python 버전 확인 및 지정
+#### global
+> 전역으로 설정된 python 버전
+#### shell
+> shell에 python 버전 지정
+#### install
+> python-build 를 사용하여 특정 버전의 python 설치 
+#### uninstall
+> 지정한 버전의 python 삭제 
+#### version
+> 현재 활성화된 python 버전 출력
+#### versions
+> pyenv로 설치되어 이용 가능한 버전 출력
+#### which
+> 활성화된 python 명령의 위치 출력 
+#### whenece
+> 지정한 명령을 포함하는 모든 python 버전 출력 
+
 
 ## pyenv-virtualenv
 ### install
@@ -117,49 +105,31 @@ $ pyenv uninstall {환경명}
 ## `autoenv`
 pyenv-virtualenv 은 가상환경을 활성화하기 위해서 직접 activate 해제하기 위해서는 deactivate를 해줘야합니다. 이러한 불편함은 `autoenv`를 통해 해결할 수 있습니다.
 
+### install
+zsh 사용시 "~/.bash_profile"을 "~/.zshrc"로 변경
+```
+$ brew install autoenv
+$ echo "source $(brew --prefix autoenv)/activate.sh" >> ~/.bashrc
+$ source ~/.bashrc
+```
+### 사용
+autoenv는 프로젝트 디렉토리에 `.env` 파일을 만듦으로써 사용할 수 있습니다.
+```
+pyenv activate {가상환경명}
+```
+### Tip
+가상환경으로 작업하는 프로젝트 폴더 상위에 아래 내용의 `.env`를 추가
+가상환경인 경우에는 해당 가상환경을 deactivate
+```
+if [ -n "$VIRTUAL_ENV" ] ; then
+    deactivate
+fi
+```
 
 ## Dependency 관리
 
 Python은 virtualenv로 dependency를 관리해줄 수 있습니다. 각 프로젝트마다 쓰일 가상 환경(virtual environment)를 생성한 다음 그 프로젝트에 필요한 python을 활성화 한 후에 필요한 라이브러리를 설치하여 사용할 수 있습니다.
 가상 환경 안에 설치된 package들은 `freeze` 명령어를 통해서 `requirement.txt` 파일로 추출되고, 이를 통해 새로운 개발환경에서도 손 쉽게 동기화할 수 있습니다.
-
-## What is pyenv?
-
-`pyenv`란 여러 버전의 Python을 쉽게 switching 해서 사용할 수 있도록 해주는 도구입니다. 예를 들면 3.x대 Python을 사용하다가 2.x로 switching하여 작업할 수 있습니다.
-
-## Install `pyenv` , `pyenv-virtualenv`
-### 설치
-```
-$ brew install pyenv
-$ brew install pyenv-virtualenv
-```
-
-
-
-### pyenv로 python 설치 가능 버전 확인
-```
-$ pyenv install --list
-```
-### pyenv로 특정 버전의 python 설치
-```
-$ pyenv install 2.7.10
-```
-### 설치된 버전 확인
-```
-$ pyenv versions
-
-* system (set by PYENV_VERSION environment variable)
-  2.7.10
-```
-### 버전 변경
-```
-$ pyenv shell 2.7.10
-```
-
-### virtualenv를 통해 특정 버전의 가상환경 생성
-```
-$ pyenv virtualenv 2.7.10 test_env
-```
 
 ## 참고
 * [TAEWAN.KIM 블로그](http://taewan.kim/post/python_virtual_env/)
