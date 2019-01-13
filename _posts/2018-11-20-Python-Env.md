@@ -122,7 +122,7 @@ pyenv activate {가상환경명}
 가상환경인 경우에는 해당 가상환경을 deactivate
 ```
 if [ -n "$VIRTUAL_ENV" ] ; then
-    deactivate
+    source deactivate
 fi
 ```
 
